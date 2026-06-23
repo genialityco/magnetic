@@ -934,6 +934,79 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   t.classList.add('active');
   document.querySelector(`.panel[data-panel="${t.dataset.tab}"]`).classList.add('active');
 }));
+
+// === GA4 TRACKING ===
+function gaEvent(name, params) { if(typeof gtag !== 'undefined') gtag('event', name, params); }
+function gaLocation(el) {
+  if(el.closest('nav')) return 'nav';
+  const s = el.closest('section[id]');
+  return s ? s.id : 'page';
+}
+
+// CTA y WhatsApp clicks
+document.querySelectorAll('a.btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const loc = gaLocation(btn);
+    const label = btn.textContent.trim().replace(/→/g, '').trim();
+    gaEvent('cta_click', { button_text: label, location: loc });
+    if(btn.classList.contains('btn-wa')) gaEvent('whatsapp_click', { location: loc });
+  });
+});
+
+// Tab de roles
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+  gaEvent('tab_view', { tab: t.dataset.tab, tab_label: t.textContent.trim() });
+}));
+
+// FAQ — qué preguntas abren
+document.querySelectorAll('details.faq').forEach(faq => {
+  faq.addEventListener('toggle', () => {
+    if(faq.open) {
+      const q = faq.querySelector('summary')?.childNodes[0]?.textContent?.trim();
+      gaEvent('faq_open', { question: q });
+    }
+  });
+});
+
+// Secciones: virtual pageview + evento section_view
+const _sectionMeta = {
+  'hero':     { path: '/',           title: 'Magnetic — Inicio' },
+  'problema': { path: '/#problema',  title: 'Magnetic — El problema' },
+  'solucion': { path: '/#solucion',  title: 'Magnetic — Solución' },
+  'roles':    { path: '/#roles',     title: 'Magnetic — Para tu rol' },
+  'planes':   { path: '/#planes',    title: 'Magnetic — Planes' },
+  'faq':      { path: '/#faq',       title: 'Magnetic — FAQ' },
+  'final':    { path: '/#contacto',  title: 'Magnetic — Agenda una demo' },
+};
+const _sio = new IntersectionObserver((es) => {
+  es.forEach(e => {
+    if(e.isIntersecting) {
+      const meta = _sectionMeta[e.target.id];
+      gaEvent('section_view', { section_id: e.target.id });
+      if(meta) {
+        gtag('event', 'page_view', {
+          page_path:  meta.path,
+          page_title: meta.title,
+          page_location: location.origin + meta.path,
+        });
+        history.replaceState(null, '', meta.path);
+      }
+      _sio.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('section[id]').forEach(s => _sio.observe(s));
+
+// Profundidad de scroll: 25 / 50 / 75 / 100 %
+const _sd = new Set();
+addEventListener('scroll', () => {
+  const total = document.body.scrollHeight - innerHeight;
+  if(total <= 0) return;
+  const pct = Math.round(scrollY / total * 100);
+  [25, 50, 75, 100].forEach(d => {
+    if(pct >= d && !_sd.has(d)) { _sd.add(d); gaEvent('scroll_depth', { depth: d }); }
+  });
+}, { passive: true });
 </script>
 <script async src="https://www.instagram.com/embed.js"></script>
 </body>
