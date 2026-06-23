@@ -292,6 +292,11 @@ section{position:relative}
 .faq[open] summary .plus{transform:rotate(45deg);background:var(--accent);color:#0A0C0B;border-color:var(--accent)}
 .faq .ans{padding:0 4px 24px;color:var(--text-dim);font-size:15.5px;line-height:1.6;max-width:680px}
 
+/* ---------- FLOATING WHATSAPP ---------- */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.45);transition:transform .2s ease,box-shadow .2s ease;text-decoration:none;color:#fff}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(37,211,102,0.6)}
+@media(max-width:600px){.wa-float{bottom:18px;right:18px;width:52px;height:52px}}
+
 /* ---------- FOOTER ---------- */
 footer{border-top:1px solid var(--line);padding:50px 0 40px}
 .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
@@ -739,15 +744,15 @@ footer{border-top:1px solid var(--line);padding:50px 0 40px}
     <div class="video-grid reveal">
       <div class="vid">
         <div class="vid-cap">Rueda de Negocios Proyecta</div>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMjLa2pxZmk/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DMjLa2pxZmk/" target="_blank" rel="noopener"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMjLa2pxZmk/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DMjLa2pxZmk/" target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
       </div>
       <div class="vid">
         <div class="vid-cap">Clic Indie Networking</div>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DISdX2xxGrj/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DISdX2xxGrj/" target="_blank" rel="noopener"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DISdX2xxGrj/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DISdX2xxGrj/" target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
       </div>
       <div class="vid">
         <div class="vid-cap">Encuentro de Afiliados Fenalco · La Felicidad</div>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DHHiivrRwns/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DHHiivrRwns/" target="_blank" rel="noopener"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DHHiivrRwns/" data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DHHiivrRwns/" target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en Instagram</a></blockquote>
       </div>
     </div>
   </div>
@@ -887,8 +892,9 @@ footer{border-top:1px solid var(--line);padding:50px 0 40px}
         </div>
         <div class="foot-col">
           <h5>Conecta</h5>
-          <a href="#">WhatsApp</a>
-          <a href="#">LinkedIn</a>
+          <a href="https://wa.me/573224387523" target="_blank" rel="noopener" data-social="whatsapp">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/geniality/" target="_blank" rel="noopener" data-social="linkedin">LinkedIn</a>
+          <a href="https://www.instagram.com/geniality_sas/" target="_blank" rel="noopener" data-social="instagram">Instagram</a>
           <a href="#final">Agenda una demo</a>
         </div>
       </div>
@@ -997,6 +1003,17 @@ const _sio = new IntersectionObserver((es) => {
 }, { threshold: 0.4 });
 document.querySelectorAll('section[id]').forEach(s => _sio.observe(s));
 
+// Redes sociales: WhatsApp flotante, LinkedIn, Instagram
+document.querySelectorAll('[data-social]').forEach(link => {
+  link.addEventListener('click', () => {
+    gaEvent('social_click', {
+      platform: link.dataset.social,
+      location: link.id === 'wa-float' ? 'floating_button' : gaLocation(link),
+      link_url: link.href
+    });
+  });
+});
+
 // Profundidad de scroll: 25 / 50 / 75 / 100 %
 const _sd = new Set();
 addEventListener('scroll', () => {
@@ -1009,5 +1026,16 @@ addEventListener('scroll', () => {
 }, { passive: true });
 </script>
 <script async src="https://www.instagram.com/embed.js"></script>
+
+<!-- Floating WhatsApp button -->
+<a href="https://wa.me/573224387523?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Magnetic"
+   class="wa-float"
+   id="wa-float"
+   target="_blank"
+   rel="noopener"
+   data-social="whatsapp"
+   aria-label="Chatear por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
+</a>
 </body>
 </html>
