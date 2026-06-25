@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magnetic — Conexión con intención, no por coincidencia</title>
+  <link rel="icon" type="image/png" href="Recurso 5mnet logo.png">
   <meta name="description"
     content="Magnetic convierte cualquier rueda de negocios, feria o congreso en reuniones que sí cierran. Matchmaking inteligente, sin apps, todo en WhatsApp. Una solución de Geniality." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -822,6 +823,13 @@
     .problem .closing em {
       font-style: normal;
       color: var(--accent)
+    }
+
+    @media(max-width:860px) {
+      .problem-intro {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important
+      }
     }
 
     /* inline data emphasis */
@@ -1944,11 +1952,11 @@
             target="_blank" rel="noopener" class="btn btn-primary">Agenda una demo →</a>
           <a href="#solucion" class="btn btn-ghost">Ver cómo funciona</a>
         </div>
-        <div class="hero-trust">
+        <!-- <div class="hero-trust">
           <span>11 ruedas y eventos ejecutados</span>
           <span>+4.500 intenciones</span>
           <span>Fenalco · Cafam · Clic Indie</span>
-        </div>
+        </div> -->
       </div>
 
       <div class="hero-visual">
@@ -2018,12 +2026,20 @@
   <!-- PROBLEM -->
   <section class="problem" id="problema">
     <div class="container sec">
-      <div class="sec-head reveal">
-        <span class="eyebrow">El problema</span>
-        <h2>La industria de eventos creció. El modelo de conexión se quedó atrás.</h2>
-        <p>Colombia ejecuta más de <span class="data">65.000</span> eventos corporativos, ferias y congresos al año. Se
-          invierten millones en agendas y metros cuadrados de stands… pero el <span class="data">80%</span> del retorno
-          sigue dependiendo de la suerte.</p>
+      <div class="problem-intro reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:52px;">
+        <div>
+          <span class="eyebrow">El problema</span>
+          <h2 style="font-size:clamp(30px,3.6vw,46px);margin:18px 0 0;">La industria de eventos creció. El modelo de conexión se quedó atrás.</h2>
+          <p style="color:var(--text-dim);font-size:18px;margin-top:18px;line-height:1.5;">Colombia ejecuta más de <span class="data">65.000</span> eventos corporativos, ferias y congresos al año. Se
+            invierten millones en agendas y metros cuadrados de stands… pero el <span class="data">80%</span> del retorno
+            sigue dependiendo de la suerte.</p>
+        </div>
+        <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--line-strong);box-shadow:0 24px 60px -20px rgba(0,0,0,0.7);">
+          <video autoplay muted loop playsinline
+            style="width:100%;display:block;border-radius:var(--r);">
+            <source src="video cafam-fenalco.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
       <div class="grid-3 reveal">
         <div class="card">
