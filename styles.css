@@ -530,6 +530,30 @@ section {
   line-height: 1.5
 }
 
+/* En celular, centrar títulos y textos de sección para que todo quede alineado igual */
+@media(max-width:600px) {
+
+  .sec-head,
+  .sec-head p {
+    text-align: center;
+    margin-inline: auto
+  }
+
+  .problem .closing {
+    text-align: center
+  }
+
+  /* Bloque de texto de la sección WhatsApp (no la lista de bullets) */
+  .wa-grid>div:first-child {
+    text-align: center
+  }
+
+  .wa-grid .wa-points {
+    text-align: left;
+    display: inline-block
+  }
+}
+
 .sec-divider {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--line) 20%, var(--line) 80%, transparent);
