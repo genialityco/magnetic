@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magnetic — Conexión con intención, no por coincidencia</title>
-  <link rel="icon" type="image/png" href="Recurso 5mnet logo.png">
+  <link rel="icon" type="image/png" href="public/Recurso 5MAGNETIC FAVICON.png">
   <meta name="description"
     content="Magnetic convierte cualquier rueda de negocios, feria o congreso en reuniones que sí cierran. Matchmaking inteligente, sin apps, todo en WhatsApp. Una solución de Geniality." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -585,24 +585,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 44px;
+      gap: 40px;
       flex-wrap: wrap;
       margin-bottom: 46px
     }
 
-    .logos span {
-      font-family: "Bricolage Grotesque";
-      font-weight: 700;
-      font-size: 19px;
-      color: var(--text-faint);
-      opacity: .65;
-      letter-spacing: -.02em;
-      transition: .3s
+    .logos img {
+      height: 42px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      opacity: .6;
+      transition: opacity .3s
     }
 
-    .logos span:hover {
-      opacity: 1;
-      color: var(--text-dim)
+    .logos img:hover {
+      opacity: 1
+    }
+
+    @media(max-width:600px) {
+      .logos {
+        gap: 24px 14px
+      }
+
+      /* Exactamente 3 por fila -> 3 arriba y 2 abajo centrados */
+      .logos img {
+        height: 30px;
+        max-width: none;
+        flex: 0 0 calc((100% - 28px) / 3)
+      }
     }
 
     .metrics {
@@ -1870,24 +1881,54 @@
       text-transform: uppercase
     }
 
-    .vid .instagram-media {
-      min-width: 0 !important;
-      width: 100% !important;
-      margin: 0 !important
+    .vid-media {
+      position: relative
     }
 
-    .vid-fallback {
+    .vid-player {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
       display: block;
       border: 1px solid var(--line-strong);
       border-radius: 16px;
-      padding: 30px 22px;
-      background: linear-gradient(165deg, var(--surface), var(--bg-2));
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 14px
+      background: #000
     }
 
-    .vid-fallback .pl {
+    .vid-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 16px;
+      background: rgba(10, 12, 11, .62);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s ease
+    }
+
+    .vid-media.is-ended .vid-overlay {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .vid-overlay-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 0 18px;
+      text-align: center;
+      color: #fff;
+      font-family: "JetBrains Mono";
+      font-size: 13.5px;
+      letter-spacing: .02em
+    }
+
+    .vid-overlay .pl {
       width: 54px;
       height: 54px;
       border-radius: 50%;
@@ -1895,8 +1936,25 @@
       color: #0A0C0B;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto 14px
+      justify-content: center
+    }
+
+    .vid-ig {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 9px 14px;
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: .01em;
+      transition: background .2s, color .2s
+    }
+
+    .vid-ig:hover {
+      background: var(--accent);
+      color: #0A0C0B
     }
 
     @media(max-width:900px) {
@@ -1938,7 +1996,7 @@
   <!-- HERO -->
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="none" onloadedmetadata="this.playbackRate = 0.5">
-      <source src="fluid-abstract-orange-light-leak-overlay-for-video-2026-01-28-05-22-06-utc.mp4" type="video/mp4">
+      <source src="public/fluid-abstract-orange-light-leak-overlay-for-video-2026-01-28-05-22-06-utc.mp4" type="video/mp4">
     </video>
     <div class="container hero-grid">
       <div class="stagger" id="hero-copy">
@@ -2000,7 +2058,11 @@
     <div class="container">
       <p class="proof-lead">La infraestructura de conexión detrás de eventos que sí generan negocio</p>
       <div class="logos">
-        <span>FENALCO</span><span>CAFAM</span><span>CLIC INDIE</span><span>INNOVAMARKET</span><span>CONECTA 12</span>
+        <img src="public/Recurso%202FENALCO.png" alt="Fenalco" loading="lazy">
+        <img src="public/Recurso%204CAFAM.png" alt="Cafam" loading="lazy">
+        <img src="public/Recurso%205CLIC%20INDIE.png" alt="Clic Indie" loading="lazy">
+        <img src="public/Recurso%201INNOVA%20MARKET.png" alt="Innova Market" loading="lazy">
+        <img src="public/Recurso%203CONECTA%2012.png" alt="Conecta 12" loading="lazy">
       </div>
       <div class="metrics" id="metrics">
         <div class="metric">
@@ -2037,7 +2099,7 @@
         <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--line-strong);box-shadow:0 24px 60px -20px rgba(0,0,0,0.7);">
           <video autoplay muted loop playsinline
             style="width:100%;display:block;border-radius:var(--r);">
-            <source src="video cafam-fenalco.mp4" type="video/mp4">
+            <source src="public/video cafam-fenalco.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -2094,7 +2156,7 @@
           style="overflow:hidden; padding:0; border-radius:18px; background:#111827; border:1px solid rgba(255,122,26,0.75); box-shadow:0 0 18px rgba(255,122,26,0.35);">
 
           <div class="card-img" style="width:100%; aspect-ratio:1/1; overflow:hidden; background:#101827;">
-            <img src="magnetic%202.png" alt="Cero fricción" loading="lazy"
+            <img src="public/magnetic%202.png" alt="Cero fricción" loading="lazy"
               style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
           </div>
 
@@ -2123,7 +2185,7 @@
           style="overflow:hidden; padding:0; border-radius:18px; background:#111827; border:1px solid rgba(255,122,26,0.75); box-shadow:0 0 18px rgba(255,122,26,0.35);">
 
           <div class="card-img" style="width:100%; aspect-ratio:1/1; overflow:hidden; background:#101827;">
-            <img src="magnetic%204.png" alt="Matchmaking inteligente" loading="lazy"
+            <img src="public/magnetic%204.png" alt="Matchmaking inteligente" loading="lazy"
               style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
           </div>
 
@@ -2154,7 +2216,7 @@
           style="overflow:hidden; padding:0; border-radius:18px; background:#111827; border:1px solid rgba(255,122,26,0.75); box-shadow:0 0 18px rgba(255,122,26,0.35);">
 
           <div class="card-img" style="width:100%; aspect-ratio:1/1; overflow:hidden; background:#101827;">
-            <img src="magnetic%205.png" alt="Agendamiento automatizado" loading="lazy"
+            <img src="public/magnetic%205.png" alt="Agendamiento automatizado" loading="lazy"
               style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
           </div>
 
@@ -2575,25 +2637,43 @@
       </div>
       <div class="video-grid reveal">
         <div class="vid">
-          <div class="vid-cap">Rueda de Negocios Proyecta</div>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMjLa2pxZmk/"
-            data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DMjLa2pxZmk/"
-              target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en
-              Instagram</a></blockquote>
+          <div class="vid-cap">Networking Magnetic</div>
+          <div class="vid-media">
+            <video class="vid-player" muted playsinline preload="metadata" data-video-title="Networking Magnetic">
+              <source src="public/NETWORKING - MAGNETIC.mp4" type="video/mp4">
+            </video>
+            <a class="vid-overlay" href="https://www.instagram.com/p/DYkD1pmuYZW/" target="_blank" rel="noopener"
+              data-social="instagram"><span class="vid-overlay-inner"><span class="pl">▶</span>Seguir mirando en
+                Instagram</span></a>
+          </div>
+          <a class="vid-ig" href="https://www.instagram.com/p/DYkD1pmuYZW/" target="_blank" rel="noopener"
+            data-social="instagram">Ver publicación en Instagram</a>
         </div>
         <div class="vid">
-          <div class="vid-cap">Clic Indie Networking</div>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DISdX2xxGrj/"
-            data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DISdX2xxGrj/"
-              target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en
-              Instagram</a></blockquote>
+          <div class="vid-cap">Caso Conecta 12</div>
+          <div class="vid-media">
+            <video class="vid-player" muted playsinline preload="metadata" data-video-title="Caso Conecta 12">
+              <source src="public/video caso conecta 12 op3.mp4" type="video/mp4">
+            </video>
+            <a class="vid-overlay" href="https://www.instagram.com/p/DZsrXkrphXW/" target="_blank" rel="noopener"
+              data-social="instagram"><span class="vid-overlay-inner"><span class="pl">▶</span>Seguir mirando en
+                Instagram</span></a>
+          </div>
+          <a class="vid-ig" href="https://www.instagram.com/p/DZsrXkrphXW/" target="_blank" rel="noopener"
+            data-social="instagram">Ver publicación en Instagram</a>
         </div>
         <div class="vid">
-          <div class="vid-cap">Encuentro de Afiliados Fenalco · La Felicidad</div>
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DHHiivrRwns/"
-            data-instgrm-version="14"><a class="vid-fallback" href="https://www.instagram.com/p/DHHiivrRwns/"
-              target="_blank" rel="noopener" data-social="instagram"><span class="pl">▶</span>Ver el video en
-              Instagram</a></blockquote>
+          <div class="vid-cap">Magnetic Networking App</div>
+          <div class="vid-media">
+            <video class="vid-player" muted playsinline preload="metadata" data-video-title="Magnetic Networking App">
+              <source src="public/MAGNETIC NETWORKING APP.mp4" type="video/mp4">
+            </video>
+            <a class="vid-overlay" href="https://www.instagram.com/p/DZxG_8tuufB/" target="_blank" rel="noopener"
+              data-social="instagram"><span class="vid-overlay-inner"><span class="pl">▶</span>Seguir mirando en
+                Instagram</span></a>
+          </div>
+          <a class="vid-ig" href="https://www.instagram.com/p/DZxG_8tuufB/" target="_blank" rel="noopener"
+            data-social="instagram">Ver publicación en Instagram</a>
         </div>
       </div>
     </div>
@@ -2658,7 +2738,7 @@
 
   <!-- GENIALITY -->
   <section class="gen">
-    <div class="gen-img"><img src="fondo_magnetic.jpeg" alt="" aria-hidden="true"></div>
+    <div class="gen-img"><img src="public/fondo_magnetic.jpeg" alt="" aria-hidden="true"></div>
     <div class="container sec">
       <div class="sec-head reveal">
         <span class="eyebrow">Por qué Geniality</span>
@@ -2922,6 +3002,38 @@
       });
     });
 
+    // Videos "Magnetic en acción": preview automático de 5s + CTA a Instagram
+    const PREVIEW_SECONDS = 5;
+    document.querySelectorAll('.vid-player').forEach(video => {
+      const title = video.dataset.videoTitle || 'video';
+      const media = video.closest('.vid-media');
+      let ended = false, played = false;
+      const track = (name, extra) => gaEvent(name, Object.assign({ video_title: title, location: gaLocation(video) }, extra));
+      const finishPreview = () => {
+        if (ended) return;
+        ended = true;
+        video.pause();
+        if (media) media.classList.add('is-ended');
+        track('video_preview_end');
+      };
+      video.addEventListener('timeupdate', () => {
+        if (video.currentTime >= PREVIEW_SECONDS) finishPreview();
+      });
+      video.addEventListener('ended', finishPreview);
+      // Reproduce el preview solo cuando la card entra en pantalla (ahorra datos)
+      const _vio = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !ended) {
+            video.play().then(() => {
+              if (!played) { played = true; track('video_play'); }
+            }).catch(() => { });
+            _vio.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      _vio.observe(video);
+    });
+
     // Profundidad de scroll: 25 / 50 / 75 / 100 %
     const _sd = new Set();
     addEventListener('scroll', () => {
@@ -2933,7 +3045,6 @@
       });
     }, { passive: true });
   </script>
-  <script async src="https://www.instagram.com/embed.js"></script>
 
   <!-- Floating WhatsApp button -->
   <a href="https://wa.me/573224387523?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Magnetic"
